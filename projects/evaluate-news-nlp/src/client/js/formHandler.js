@@ -1,18 +1,26 @@
-function handleSubmit(event) {
-  event.preventDefault();
+function handleSubmit(e) {
+  e.preventDefault();
+  const userInput = document.getElementById("website").value;
+  analyzeText(userInput);
+}
 
-  let formText = document.getElementById("name").value;
-  const apiKey = process.env.API_KEY;
-  const apiRequestURL = `https://api.meaningcloud.com/sentiment-2.1?url=${formText}&key=${apiKey}&lang=en`;
-  console.log(apiRequestURL);
-  Client.getLanguageData(apiRequestURL);
-
-  console.log("::: Form Submitted :::");
-  fetch("http://localhost:8081/test")
+function analyzeText(userInput) {
+  fetch("http://localhost:8081/userData", {
+    method: "POST",
+    credentials: "same-origin",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ input: userInput }),
+  })
     .then((res) => res.json())
     .then(function (res) {
-      document.getElementById("results").innerHTML = res.message;
+      console.log(res);
+      const pageElement = document.getElementById("results");
+      Client.updatePageContents(pageElement, res);
     });
 }
 
 export { handleSubmit };
+export { analyzeText };

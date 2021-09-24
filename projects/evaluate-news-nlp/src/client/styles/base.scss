@@ -8,7 +8,11 @@ main {
   flex: 2;
 }
 
-section {
+body {
   max-width: 800px;
+  width: 100%;
   margin: 50px auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }

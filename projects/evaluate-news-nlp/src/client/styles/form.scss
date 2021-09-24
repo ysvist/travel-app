@@ -10,3 +10,23 @@ input {
   line-height: 16px;
   margin: 10px 0;
 }
+.content {
+  margin-bottom: 20px;
+}
+
+.form-result {
+  h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+  strong {
+    font-weight: bold;
+    display: inline-block;
+  }
+  .results-list {
+    .results-list__result {
+      margin-bottom: 5px;
+      color: #444;
+    }
+  }
+}

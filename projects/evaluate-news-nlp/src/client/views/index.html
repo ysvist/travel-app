@@ -2,44 +2,53 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project 4: Language Processing App</title>
   </head>
 
   <body>
     <header>
-      <div class="">Logo</div>
-      <div class="">navigation</div>
+      <h1>Process the language used by a webpage</h1>
     </header>
 
     <main>
-      <section>
-        <form class="" onsubmit="return Client.handleSubmit(event)">
+      <section class="content">
+        <form onsubmit="return Client.handleSubmit(event)">
+          <label for="title">Webpage to analyze</label>
           <input
-            id="name"
+            id="website"
             type="text"
             name="input"
             value=""
-            onblur="Client.onBlur()"
-            placeholder="Name"
+            placeholder="Enter URL here"
           />
           <input
-            type="button"
+            type="submit"
             name=""
-            value="submit"
+            value="Submit"
             onclick="return Client.handleSubmit(event)"
             onsubmit="return Client.handleSubmit(event)"
           />
         </form>
       </section>
 
-      <section>
-        <strong>Form Results:</strong>
+      <section class="form-result">
+        <h2>Results:</h2>
         <div id="results"></div>
       </section>
     </main>
 
     <footer>
-      <p>This is a footer</p>
+      <p>Udacity Front End Program Assignment completed by Yuliya Svist</p>
     </footer>
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js");
+        });
+      }
+    </script>
   </body>
 </html>
