@@ -16,7 +16,6 @@ function analyzeText(userInput) {
   })
     .then((res) => res.json())
     .then(function (res) {
-      console.log(res);
       const pageElement = document.getElementById("results");
       Client.updatePageContents(pageElement, res);
     });
