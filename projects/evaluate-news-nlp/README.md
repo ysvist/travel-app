@@ -16,3 +16,4 @@ To test my ability.
 
 - Copied **package-lock versions** from udacity forum answers and from a working version by @ElineJ at github to make things actually work together nicely
 - Also referenced @ElineJ's code for the JSDOM testing method
+- Regex URL validation found on https://stackoverflow.com/questions/161738/
