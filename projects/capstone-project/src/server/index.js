@@ -17,13 +17,15 @@ app.get("/", function (req, res) {
   res.sendFile("dist/index.html");
 });
 
+const trips = [];
+
 app.listen(8081, function () {
   console.log("Example app listening on port 8081!");
 });
 
 app.post("/userData", async (req, res) => {
   const response = await fetch(
-    `https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&url=${req.body.input}`
+    `http://api.geonames.org/search?q=${req.body.input}&lang=en&maxRows=10&type=json&username=${process.env.GEONAMES_API_KEY}`
   );
   try {
     const data = await response.json();

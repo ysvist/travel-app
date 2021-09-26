@@ -3,25 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project 4: Language Processing App</title>
+    <title>Travel Planner</title>
   </head>
 
   <body>
     <header>
-      <h1>Process the language used by a webpage</h1>
+      <h1>Plan your next trip!</h1>
     </header>
 
     <main>
       <section class="content">
         <form onsubmit="return Client.handleSubmit(event)">
-          <label for="title">Webpage to analyze</label>
+          <label for="destination">Travel destination</label>
           <input
-            id="website"
+            id="city"
             type="text"
-            name="input"
+            name="destination"
             value=""
-            placeholder="Enter URL here"
+            placeholder="Travel destination"
           />
+          <label for="date">Arrival date</label>
+          <input type="date" id="date" name="date" value="" />
           <input
             type="submit"
             name=""
@@ -34,14 +36,17 @@
 
       <section class="form-result">
         <h2>Results:</h2>
-        <div id="results"></div>
+        <div id="results">
+          <div id="results__destination"></div>
+          <div id="results__countdown"></div>
+        </div>
       </section>
     </main>
 
     <footer>
       <p>Udacity Front End Program Assignment completed by Yuliya Svist</p>
     </footer>
-    <script>
+    <!-- <script>
       // Check that service workers are supported
       if ("serviceWorker" in navigator) {
         // Use the window load event to keep the page load performant
@@ -49,6 +54,6 @@
           navigator.serviceWorker.register("/service-worker.js");
         });
       }
-    </script>
+    </script> -->
   </body>
 </html>

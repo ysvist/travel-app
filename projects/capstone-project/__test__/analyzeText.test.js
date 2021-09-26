@@ -1,7 +1,7 @@
-import { analyzeText } from "../src/client/js/formHandler";
+import { getLocationData } from "../src/client/js/formHandler";
 
-describe("Testing the analyzeText functionality", () => {
-  test("Testing the analyzeText() function", () => {
-    expect(analyzeText).toBeDefined();
+describe("Testing the getLocationData functionality", () => {
+  test("Testing the getLocationData() function", () => {
+    expect(getLocationData).toBeDefined();
   });
 });

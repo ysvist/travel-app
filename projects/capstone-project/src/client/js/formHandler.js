@@ -1,23 +1,36 @@
 function handleSubmit(e) {
   e.preventDefault();
-  const userInput = document.getElementById("website").value;
-  function validateURL() {
-    const regexURL = new RegExp(
-      /^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i
-    );
-    return regexURL.test(userInput);
-  }
-  const isValidURL = validateURL();
-  if (isValidURL) {
-    analyzeText(userInput);
-  } else {
+  const userQuery = document.getElementById("city").value;
+  const arrivalDate = document.getElementById("date").value;
+  if (checkDate(arrivalDate)) {
+    getLocationData(userQuery);
+  } else
     document.getElementById(
       "results"
-    ).innerHTML = `<p class="warning">Invalid URL input. Please enter a valid URL.</p>`;
-  }
+    ).innerHTML = `<p class="warning">Invalid arrival date input. Please enter a date in the future.</p>`;
 }
 
-function analyzeText(userInput) {
+const checkDate = (arrivalDate) => {
+  const now = new Date();
+  const arrivalDateEpoch = new Date(arrivalDate);
+  if (!arrivalDate || arrivalDateEpoch < now) {
+    return false;
+  } else {
+    calculateTravelTime({ now, arrivalDateEpoch });
+    return true;
+  }
+};
+
+function calculateTravelTime({ now, arrivalDateEpoch }) {
+  const millisecondsToArrival = arrivalDateEpoch - now;
+  // convert milliseconds to number of days, rounding up to the nearest full day
+  const daysToArrival = Math.ceil(millisecondsToArrival / 1000 / 60 / 60 / 24);
+  document.getElementById(
+    "results__countdown"
+  ).innerHTML = `Days until trip: ${daysToArrival}.`;
+}
+
+function getLocationData(userQuery) {
   fetch("http://localhost:8081/userData", {
     method: "POST",
     credentials: "same-origin",
@@ -25,14 +38,14 @@ function analyzeText(userInput) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ input: userInput }),
+    body: JSON.stringify({ input: userQuery }),
   })
     .then((res) => res.json())
     .then(function (res) {
-      const pageElement = document.getElementById("results");
+      const pageElement = document.getElementById("results__destination");
       Client.updatePageContents(pageElement, res);
     });
 }
 
 export { handleSubmit };
-export { analyzeText };
+export { getLocationData };
