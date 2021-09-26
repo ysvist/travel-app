@@ -6,8 +6,9 @@ function handleSubmit(e) {
     getLocationData(userQuery);
   } else
     document.getElementById(
-      "results"
+      "results__countdown"
     ).innerHTML = `<p class="warning">Invalid arrival date input. Please enter a date in the future.</p>`;
+  document.getElementById("results__destination").innerHTML = ``;
 }
 
 const checkDate = (arrivalDate) => {
@@ -44,8 +45,47 @@ function getLocationData(userQuery) {
     .then(function (res) {
       const pageElement = document.getElementById("results__destination");
       Client.updatePageContents(pageElement, res);
+      getForecastData();
+      getPhoto();
     });
 }
 
+async function getForecastData() {
+  fetch("http://localhost:8081/travelForecast", {
+    method: "POST",
+    credentials: "same-origin",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then(function (res) {
+      console.log(res);
+      document.getElementById(
+        "results__forecast"
+      ).innerHTML = `Weather: High of ${res.data[0].high_temp}&deg;F, low of ${res.data[0].low_temp}&deg;F.`;
+    });
+}
+
+async function getPhoto() {
+  fetch("http://localhost:8081/destinationImage", {
+    method: "POST",
+    credentials: "same-origin",
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then(function (res) {
+      console.log(res);
+      document.getElementById(
+        "results__photo"
+      ).innerHTML = `<img src=\"${res.hits[0].largeImageURL}\" alt=\"Photograph of Paris by Pixabay user ${res.hits[0].user}\" />`;
+    });
+}
+
+export { getForecastData };
 export { handleSubmit };
 export { getLocationData };

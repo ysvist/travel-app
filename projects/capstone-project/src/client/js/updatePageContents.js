@@ -1,6 +1,5 @@
 function updatePageContents(pageElement, content) {
   const firstResult = content.geonames[0];
-  console.log(firstResult);
   const city = firstResult.name;
   const locality = firstResult.adminName1;
   const country = firstResult.countryName;
