@@ -1,7 +1,8 @@
 form {
-  border: 1px solid #545454;
-  border-radius: 3px;
+  border: 2px solid #d62828;
+  border-radius: 5px;
   padding: 40px;
+  background: #fff;
 }
 
 input {
@@ -9,7 +10,15 @@ input {
   width: 100%;
   line-height: 16px;
   margin: 10px 0;
+  border: 2px solid #003049;
+  margin-bottom: 20px;
+  background-color: rgba(234, 226, 183, 0.25);
 }
+
+label {
+  font-weight: bold;
+}
+
 .content {
   margin-bottom: 20px;
 }
@@ -23,22 +32,68 @@ input {
     font-size: 25px;
     margin-bottom: 10px;
   }
-  strong {
-    font-weight: bold;
-    display: inline-block;
+}
+
+input {
+  border-radius: 5px;
+  padding: 10px;
+  &:hover {
+    border-color: #f77f00;
   }
-  .results-list {
-    .results-list__result {
-      margin-bottom: 5px;
-      color: #444;
+  &[type="submit"] {
+    background: #fcbf49;
+    border-color: #fcbf49;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 12px;
+    color: #003049;
+    &:hover {
+      background: #f77f00;
+      border-color: #f77f00;
+      color: #fff;
     }
   }
 }
 
+.form-result {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#form-result__heading {
+  font-weight: bold;
+  font-size: 36px;
+  align-self: flex-start;
+}
+
+.form-result {
+  font-size: 18px;
+  strong {
+    font-weight: bold;
+  }
+}
+
+#results__countdown {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#results__destination,
+#results__forecast {
+  margin-bottom: 10px;
+}
+
 #results__photo {
   img {
-    width: 500px;
-    height: auto;
     max-width: 100%;
+  }
+}
+
+#results__photo__caption {
+  margin: 5px auto 60px;
+  font-size: 14px;
+  a {
+    color: #dd0000;
   }
 }
