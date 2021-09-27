@@ -1,10 +1,10 @@
-import { updatePageContents } from "../src/client/js/updatePageContents";
+import { updateTripInformation } from "../src/client/js/updateTripInformation";
 
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-describe("Testing the updatePageContents functionality", () => {
-  test("updatePageContents correctly updates page with API call results", () => {
+describe("Testing the updateTripInformation functionality", () => {
+  test("updateTripInformation correctly updates page with API call results", () => {
     const testDOM = new JSDOM(`<div id="results"></div>`);
     const content = {
       confidence: "69",
@@ -15,7 +15,7 @@ describe("Testing the updatePageContents functionality", () => {
     const placeholderElement =
       testDOM.window.document.getElementById("results");
 
-    updatePageContents(placeholderElement, content);
+    updateTripInformation(placeholderElement, content);
     expect(placeholderElement.innerHTML)
       .toBe(`<ul class="results-list"><li class="results-list__result"><strong>Confidence:</strong> 69</li>
   <li class="results-list__result"><strong>Score tag:</strong> undefined</li>
