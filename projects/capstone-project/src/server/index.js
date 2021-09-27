@@ -3,6 +3,11 @@ dotenv.config();
 const bodyParser = require("body-parser");
 var path = require("path");
 
+// making API keys public for review purposes :|
+const GEONAMES_API_KEY = "ysvist";
+const WEATHERBIT_API_KEY = "0767a156deaf49a4ae2f6322a2f94357";
+const PIXABAY_API_KEY = "23572816-6dddab05fefc601a99b8b1954";
+
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -23,7 +28,7 @@ app.listen(8081, function () {
 
 app.post("/userData", async (req, res) => {
   const response = await fetch(
-    `http://api.geonames.org/search?q=${req.body.input}&lang=en&maxRows=10&type=json&username=${process.env.GEONAMES_API_KEY}`
+    `http://api.geonames.org/search?q=${req.body.input}&lang=en&maxRows=10&type=json&username=${GEONAMES_API_KEY}`
   );
   try {
     const data = await response.json();
@@ -39,7 +44,7 @@ app.post("/travelForecast", async (req, res) => {
   const longitude = await location.lng;
   const latitude = await location.lat;
   const response = await fetch(
-    `http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHERBIT_API_KEY}&units=I&lat=${latitude}&lon=${longitude}&days=${days}`
+    `http://api.weatherbit.io/v2.0/forecast/daily?key=${WEATHERBIT_API_KEY}&units=I&lat=${latitude}&lon=${longitude}&days=${days}`
   );
   try {
     const data = await response.json();
@@ -54,14 +59,14 @@ app.post("/destinationImage", async (req, res) => {
   const destinationName = location.name;
   const countryName = location.countryName;
   const response = await fetch(
-    `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&image_type=photo&q=${destinationName}&category=places`
+    `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&image_type=photo&q=${destinationName}&category=places`
   );
   try {
     const data = await response.json();
     // can't find a result for this specific place? fetch a photo from the country instead.
     if (!data.total) {
       const altResponse = await fetch(
-        `https://pixabay.com/api/?key=${process.env.PIXABAY_API_KEY}&image_type=photo&q=${countryName}&category=places`
+        `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&image_type=photo&q=${countryName}&category=places`
       );
       try {
         const altData = await altResponse.json();
