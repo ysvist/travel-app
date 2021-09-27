@@ -1,5 +1,4 @@
 function updateTripInformation(locationData, forecastData, destinationPhoto) {
-  console.log(forecastData);
   const firstResult = locationData.geonames[0];
   const city = firstResult.name;
   const locality = firstResult.adminName1;

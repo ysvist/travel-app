@@ -12,7 +12,7 @@ function calculateTravelTime({ now, arrivalDateEpoch }) {
   const millisecondsToArrival = arrivalDateEpoch - now;
   // convert milliseconds to number of days, rounding up to the nearest full day
   const daysToArrival = Math.ceil(millisecondsToArrival / 1000 / 60 / 60 / 24);
-  Client.updateCountdown(daysToArrival);
+  Client.updateCountdown({ daysToArrival });
   return daysToArrival;
 }
 
